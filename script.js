@@ -49,6 +49,50 @@
   }
 
   /* ----------------------------------------------------------------
+     Full-screen mobile menu
+  ---------------------------------------------------------------- */
+  function initMobileNav() {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const menu = document.getElementById('primary-nav');
+    if (!toggle || !menu) return;
+
+    const closeMenu = () => {
+      toggle.classList.remove('is-active');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+      menu.classList.remove('is-open');
+      document.body.classList.remove('nav-open');
+    };
+
+    const openMenu = () => {
+      toggle.classList.add('is-active');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+      menu.classList.add('is-open');
+      document.body.classList.add('nav-open');
+    };
+
+    toggle.addEventListener('click', () => {
+      if (menu.classList.contains('is-open')) closeMenu();
+      else openMenu();
+    });
+
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    window.addEventListener(
+      'resize',
+      rafThrottle(() => {
+        if (window.innerWidth > 880) closeMenu();
+      }),
+      { passive: true }
+    );
+  }
+
+  /* ----------------------------------------------------------------
      Parallax drift on project media + hero floaters
   ---------------------------------------------------------------- */
   function initParallax(onScrollCallbacks) {
@@ -374,6 +418,7 @@
     initServiceGlow();
     initCustomCursor();
     initPageTransitions();
+    initMobileNav();
   }
 
   if (document.readyState === 'loading') {
