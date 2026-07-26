@@ -87,6 +87,25 @@
   }
 
   /* ----------------------------------------------------------------
+     Mobile nav scroller: hide the edge fade once there's nothing more
+     to reveal in that direction (otherwise it dims the last item at rest)
+  ---------------------------------------------------------------- */
+  function initNavEdgeFade() {
+    const nav = document.querySelector('.nav-links');
+    if (!nav) return;
+
+    const sync = () => {
+      const maxScroll = nav.scrollWidth - nav.clientWidth;
+      nav.classList.toggle('is-at-start', nav.scrollLeft <= 2);
+      nav.classList.toggle('is-at-end', nav.scrollLeft >= maxScroll - 2);
+    };
+
+    sync();
+    nav.addEventListener('scroll', rafThrottle(sync), { passive: true });
+    window.addEventListener('resize', rafThrottle(sync), { passive: true });
+  }
+
+  /* ----------------------------------------------------------------
      Parallax drift on project media + hero floaters
   ---------------------------------------------------------------- */
   function initParallax(onScrollCallbacks) {
@@ -404,6 +423,7 @@
     initBackToTop(onScrollCallbacks);
     bindScroll(onScrollCallbacks);
 
+    initNavEdgeFade();
     initReveal();
     initHeroEntrance();
     initProcess();

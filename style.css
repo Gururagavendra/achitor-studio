@@ -442,6 +442,17 @@ textarea:focus-visible {
     width: 28px;
     z-index: 2;
     pointer-events: none;
+    transition: opacity .25s ease;
+  }
+
+  /* No more to reveal in that direction once fully scrolled — the fade
+     would otherwise dim "Contact" (the last item) even at rest. */
+  .nav-links.is-at-start::before {
+    opacity: 0;
+  }
+
+  .nav-links.is-at-end::after {
+    opacity: 0;
   }
 
   .nav-links::before {
