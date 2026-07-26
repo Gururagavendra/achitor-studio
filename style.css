@@ -530,6 +530,96 @@ textarea:focus-visible {
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000, transparent 100%);
 }
 
+/* Small scattered accents that stand in for the hidden desktop mockup on
+   mobile — kept subtle and out from under the headline/body copy. */
+.hero-floaters {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .hero-floaters {
+    display: block;
+  }
+}
+
+.hero-floaters__item {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.hero-floaters__item--1 {
+  top: 10%;
+  left: 6%;
+  width: 13px;
+  height: 13px;
+  background: rgba(var(--accent-rgb), 0.32);
+  animation: floatDrift1 8s ease-in-out infinite;
+}
+
+.hero-floaters__item--2 {
+  top: 20%;
+  right: 9%;
+  width: 8px;
+  height: 8px;
+  background: rgba(var(--accent-teal-rgb), 0.4);
+  animation: floatY2 7s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+.hero-floaters__item--3 {
+  top: 4%;
+  right: 26%;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid rgba(var(--accent-orange-rgb), 0.35);
+  animation: floatDrift2 11s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.hero-floaters__item--4 {
+  top: 46%;
+  left: 3%;
+  width: 7px;
+  height: 7px;
+  background: rgba(var(--accent-purple-rgb), 0.42);
+  animation: floatY 9s ease-in-out infinite;
+  animation-delay: 0.7s;
+}
+
+.hero-floaters__item--5 {
+  top: 58%;
+  right: 5%;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgba(var(--accent-rgb), 0.28);
+  animation: floatDrift1 10.5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.hero-floaters__item--6 {
+  top: 74%;
+  left: 16%;
+  width: 6px;
+  height: 6px;
+  background: rgba(var(--accent-teal-rgb), 0.38);
+  animation: floatY2 6.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.hero-floaters__item--7 {
+  top: 84%;
+  right: 22%;
+  width: 10px;
+  height: 10px;
+  background: rgba(var(--accent-orange-rgb), 0.3);
+  animation: floatDrift2 8.5s ease-in-out infinite;
+  animation-delay: 1.6s;
+}
+
 .hero-inner {
   position: relative;
   max-width: var(--container-max);
@@ -1669,6 +1759,18 @@ textarea:focus-visible {
 @keyframes floatY2 {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(12px); }
+}
+
+@keyframes floatDrift1 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(8px, -14px); }
+  66% { transform: translate(-6px, 8px); }
+}
+
+@keyframes floatDrift2 {
+  0%, 100% { transform: translate(0, 0); }
+  40% { transform: translate(-10px, -10px); }
+  75% { transform: translate(7px, 6px); }
 }
 
 @keyframes blink {
