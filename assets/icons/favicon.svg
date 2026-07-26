@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Achitor">
+  <rect width="32" height="32" rx="8" fill="#14161A"/>
+  <path d="M16 8 L23.5 24 H19.6 L18.1 20.4 H13.9 L12.4 24 H8.5 Z M16 13.4 L14.3 17.4 H17.7 Z" fill="#FBFAF8"/>
+  <circle cx="24.5" cy="8.5" r="2.4" fill="#2E5E8E"/>
+</svg>
