@@ -430,41 +430,6 @@ textarea:focus-visible {
     display: none;
   }
 
-  /* Edges fade into the bar's own dark colour (not to transparent), so the
-     scrolling text sinks out of view without ever revealing the page
-     behind it. Sit on top of the links, so pointer-events must pass through. */
-  .nav-links::before,
-  .nav-links::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 28px;
-    z-index: 2;
-    pointer-events: none;
-    transition: opacity .25s ease;
-  }
-
-  /* No more to reveal in that direction once fully scrolled — the fade
-     would otherwise dim "Contact" (the last item) even at rest. */
-  .nav-links.is-at-start::before {
-    opacity: 0;
-  }
-
-  .nav-links.is-at-end::after {
-    opacity: 0;
-  }
-
-  .nav-links::before {
-    left: 0;
-    background: linear-gradient(90deg, var(--ink), transparent);
-  }
-
-  .nav-links::after {
-    right: 0;
-    background: linear-gradient(90deg, transparent, var(--ink));
-  }
-
   .nav-links a {
     display: inline-flex;
     align-items: baseline;
