@@ -398,6 +398,7 @@ textarea:focus-visible {
      own full-width dark band underneath (order pulls it after both,
      flex-basis:100% forces the wrap — .site-nav already has flex-wrap). */
   .nav-links {
+    position: relative;
     order: 3;
     flex: 1 1 100%;
     flex-wrap: nowrap;
@@ -415,12 +416,34 @@ textarea:focus-visible {
     border-radius: 0;
     background: rgba(var(--ink-rgb), 0.94);
     color: rgba(251, 250, 248, 0.72);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
   }
 
   .nav-links::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Edges fade into the bar's own dark colour (not to transparent), so the
+     scrolling text sinks out of view without ever revealing the page
+     behind it. Sit on top of the links, so pointer-events must pass through. */
+  .nav-links::before,
+  .nav-links::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .nav-links::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(var(--ink-rgb), 0.94), transparent);
+  }
+
+  .nav-links::after {
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(var(--ink-rgb), 0.94));
   }
 
   .nav-links a {
