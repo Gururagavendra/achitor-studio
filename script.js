@@ -49,6 +49,44 @@
   }
 
   /* ----------------------------------------------------------------
+     Scrollspy: highlight the nav link for the section in view
+  ---------------------------------------------------------------- */
+  function initScrollSpy(onScrollCallbacks) {
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+    if (!navLinks.length) return;
+
+    const targets = navLinks
+      .map((link) => {
+        const el = document.getElementById(link.getAttribute('href').slice(1));
+        return el ? { link, el } : null;
+      })
+      .filter(Boolean);
+
+    if (!targets.length) return;
+
+    let activeLink = null;
+
+    onScrollCallbacks.push(() => {
+      const y = (window.scrollY || window.pageYOffset) + window.innerHeight * 0.3;
+      let current = null;
+      targets.forEach((t) => {
+        if (t.el.offsetTop <= y) current = t;
+      });
+      const nextLink = current ? current.link : null;
+      if (nextLink === activeLink) return;
+
+      if (activeLink) activeLink.classList.remove('is-current');
+      if (nextLink) {
+        nextLink.classList.add('is-current');
+        if (!reduceMotion) {
+          nextLink.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+        }
+      }
+      activeLink = nextLink;
+    });
+  }
+
+  /* ----------------------------------------------------------------
      Parallax drift on project media + hero floaters
   ---------------------------------------------------------------- */
   function initParallax(onScrollCallbacks) {
@@ -361,6 +399,7 @@
     const onScrollCallbacks = [];
     initProgress(onScrollCallbacks);
     initNav(onScrollCallbacks);
+    initScrollSpy(onScrollCallbacks);
     initParallax(onScrollCallbacks);
     initBackToTop(onScrollCallbacks);
     bindScroll(onScrollCallbacks);
