@@ -488,7 +488,11 @@ textarea:focus-visible {
    clamp() was tuned for — give the hero extra clearance to match. */
 @media (max-width: 880px) {
   .hero {
-    padding-top: 176px;
+    padding-top: 148px;
+  }
+
+  .site-header.is-scrolled {
+    box-shadow: none;
   }
 }
 
