@@ -414,8 +414,16 @@ textarea:focus-visible {
     padding-inline: 24px 32px;
     scroll-padding-inline: 8px 20px;
     border-radius: 0;
-    background: rgba(var(--ink-rgb), 0.94);
+    background: var(--ink);
     color: rgba(251, 250, 248, 0.72);
+  }
+
+  .site-nav {
+    padding-bottom: 0;
+  }
+
+  .site-header.is-scrolled .site-nav {
+    padding-block: 12px 0;
   }
 
   .nav-links::-webkit-scrollbar {
@@ -438,12 +446,12 @@ textarea:focus-visible {
 
   .nav-links::before {
     left: 0;
-    background: linear-gradient(90deg, rgba(var(--ink-rgb), 0.94), transparent);
+    background: linear-gradient(90deg, var(--ink), transparent);
   }
 
   .nav-links::after {
     right: 0;
-    background: linear-gradient(90deg, transparent, rgba(var(--ink-rgb), 0.94));
+    background: linear-gradient(90deg, transparent, var(--ink));
   }
 
   .nav-links a {
