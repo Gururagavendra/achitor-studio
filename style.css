@@ -606,6 +606,26 @@ textarea:focus-visible {
   min-width: 0;
 }
 
+/* The floating checkout/metrics mockup only earns its space with room either
+   side of the copy; below that it just stacks awkwardly under the text. */
+@media (max-width: 900px) {
+  .hero-visual {
+    display: none;
+  }
+
+  .hero-orb--a {
+    opacity: 0.62;
+  }
+
+  .hero-orb--b {
+    opacity: 0.6;
+  }
+
+  .hero-orb--c {
+    opacity: 0.5;
+  }
+}
+
 .hero-card {
   position: absolute;
   padding: 20px;
@@ -887,12 +907,35 @@ textarea:focus-visible {
 }
 
 .project__media {
+  display: block;
   position: relative;
   padding-bottom: 56px;
   perspective: 1400px;
 }
 
-.project__media--reverse .browser-frame { margin-left: auto; }
+.project__media-badge {
+  position: absolute;
+  top: calc(50% - 28px);
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%, -50%) translateY(8px);
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background: rgba(var(--ink-rgb), 0.88);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease, transform .35s var(--ease-out-quick);
+}
+
+.project__media:hover .project__media-badge,
+.project__media:focus-visible .project__media-badge {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
 
 .browser-frame {
   position: relative;
