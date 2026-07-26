@@ -394,8 +394,12 @@ textarea:focus-visible {
 }
 
 @media (max-width: 880px) {
+  /* Logo + "Start a Project" stay on the title row; the menu becomes its
+     own full-width dark band underneath (order pulls it after both,
+     flex-basis:100% forces the wrap — .site-nav already has flex-wrap). */
   .nav-links {
-    flex: 1 1 auto;
+    order: 3;
+    flex: 1 1 100%;
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: clamp(18px, 5vw, 28px);
@@ -404,9 +408,12 @@ textarea:focus-visible {
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-block: 4px;
+    padding-block: 12px;
     padding-inline: 24px 32px;
     scroll-padding-inline: 8px 20px;
+    border-radius: var(--radius-pill);
+    background: rgba(var(--ink-rgb), 0.94);
+    color: rgba(251, 250, 248, 0.72);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
     mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
   }
@@ -424,39 +431,6 @@ textarea:focus-visible {
     white-space: nowrap;
   }
 
-  .nav-links__index {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: var(--accent-light);
-  }
-
-  /* Dark header on mobile: a clear boundary between header, menu, and
-     the light page content underneath (instead of a barely-there tint). */
-  .site-header {
-    background: rgba(var(--ink-rgb), 0.94);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
-  }
-
-  .site-header.is-scrolled {
-    background: rgba(var(--ink-rgb), 0.98);
-    box-shadow: 0 14px 30px -20px rgba(0, 0, 0, 0.55);
-  }
-
-  .site-header .logo {
-    color: var(--bg);
-  }
-
-  .site-header .logo:hover,
-  .site-header .logo:focus-visible {
-    color: var(--accent-light);
-  }
-
-  .nav-links {
-    color: rgba(251, 250, 248, 0.72);
-  }
-
   .nav-links a:hover,
   .nav-links a:focus-visible {
     color: var(--bg);
@@ -466,16 +440,12 @@ textarea:focus-visible {
     color: var(--accent-light);
   }
 
-  .site-header .nav-cta {
-    border-color: transparent;
-    background: var(--bg);
-    color: var(--ink);
-  }
-
-  .site-header .nav-cta:hover,
-  .site-header .nav-cta:focus-visible {
-    background: #FFFFFF;
-    color: var(--ink);
+  .nav-links__index {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--accent-light);
   }
 }
 
@@ -511,6 +481,15 @@ textarea:focus-visible {
   align-items: center;
   padding: clamp(112px, 17vw, 160px) var(--gutter) 100px;
   overflow: hidden;
+}
+
+/* The mobile header wraps to two rows (title + dark menu band below),
+   so it's taller than the single-row desktop/tablet header this
+   clamp() was tuned for — give the hero extra clearance to match. */
+@media (max-width: 880px) {
+  .hero {
+    padding-top: 176px;
+  }
 }
 
 .hero-spotlight {
